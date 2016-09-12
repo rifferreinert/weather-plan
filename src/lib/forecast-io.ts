@@ -2,14 +2,14 @@ import * as rp  from 'request-promise';
 import * as querystring from 'querystring';
 import * as geocoder from './geocoder';
 
-interface ForecastOptions {
+export interface ForecastOptions {
   units?: string;
   exclude?: string;
   extended?: string;
   lang?: string;
 }
 
-interface DataPoint {
+export interface DataPoint {
   time: number;
   summary?: string;
   icon?: string;
@@ -44,20 +44,20 @@ interface DataPoint {
   ozone?: number;
 }
 
-interface DataBlock {
+export interface DataBlock {
   summary: string;
   icon: string;
   data: DataPoint[];
 }
 
-interface Alert {
+export interface Alert {
   title: string;
   expires: number;
   description: string;
   uri: string;
 }
 
-interface ForecastResponse {
+export interface ForecastResponse {
   latitude: number;
   longitude: number;
   timezone: string;
