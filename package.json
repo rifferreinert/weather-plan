@@ -6,7 +6,6 @@
   "scripts": {
     "precompile": "npm run clean",
     "compile": "npm run compile:ts",
-
     "compile:ts": "tsc",
     "clean": "rimraf build/*"
   },
@@ -37,13 +36,18 @@
     "@angular/platform-browser-dynamic": "^2.0.0-rc.6",
     "@angular/platform-server": "^2.0.0-rc.6",
     "@angular/router": "^3.0.0-rc.2",
+    "bluebird": "^3.4.6",
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
+    "dotenv": "^2.0.0",
     "es6-shim": "^0.35.1",
     "express": "^4.14.0",
+    "node-geocoder": "^3.15.0",
     "reflect-metadata": "^0.1.8",
+    "request": "^2.74.0",
+    "request-promise": "^4.1.1",
     "rxjs": "^5.0.0-beta.11",
     "systemjs": "^0.19.37",
-    "zone.js": "^0.6.17"
+    "zone.js": "^0.6.21"
   }
 }

@@ -54,6 +54,10 @@
             "check-operator",
             "check-separator",
             "check-type"
+        ],
+        "max-line-length": [
+          true,
+          100
         ]
     }
 }
