@@ -4,10 +4,13 @@
   "description": "Webapp that helps you plan the best days for your workouts",
   "main": "index.js",
   "scripts": {
-    "precompile": "npm run clean",
-    "compile": "npm run compile:ts",
-    "compile:ts": "tsc",
-    "clean": "rimraf build/*"
+    "prebuild": "npm run clean && npm run lint",
+    "build": "npm run build:ts",
+    "build:ts": "tsc",
+    "clean": "rimraf build/*",
+    "lint:ts": "tslint --project ./tsconfig.json",
+    "lint": "npm run lint:ts",
+    "preinstall": "typings install"
   },
   "repository": {
     "type": "git",
