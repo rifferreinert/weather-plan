@@ -9,8 +9,11 @@
     "build:ts": "tsc",
     "clean": "rimraf build/*",
     "lint:ts": "tslint --project ./tsconfig.json",
-    "lint": "npm run lint:ts",
-    "preinstall": "typings install"
+    "lint:js": "eslint ./spec/**/*.js",
+    "lint": "npm run lint:ts && npm run lint:js",
+    "preinstall": "typings install",
+    "pretest": "npm run lint",
+    "test": "jasmine"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,9 @@
   },
   "homepage": "https://github.com/rifferreinert/weather-plan#readme",
   "devDependencies": {
+    "eslint": "^3.5.0",
+    "eslint-plugin-jasmine": "^1.8.1",
+    "jasmine": "^2.5.2",
     "rimraf": "^2.5.4",
     "tslint": "^3.15.1",
     "typescript": "^1.8.10",
@@ -32,7 +38,7 @@
     "@angular/common": "^2.0.0-rc.6",
     "@angular/compiler": "^2.0.0-rc.6",
     "@angular/compiler-cli": "^0.6.0",
-    "@angular/core": "^2.0.0-rc.6",
+    "@angular/core": "^2.0.0",
     "@angular/forms": "^2.0.0-rc.6",
     "@angular/http": "^2.0.0-rc.6",
     "@angular/platform-browser": "^2.0.0-rc.6",
@@ -45,6 +51,8 @@
     "dotenv": "^2.0.0",
     "es6-shim": "^0.35.1",
     "express": "^4.14.0",
+    "moment": "^2.15.0",
+    "moment-timezone": "^0.5.5",
     "node-geocoder": "^3.15.0",
     "reflect-metadata": "^0.1.8",
     "request": "^2.74.0",

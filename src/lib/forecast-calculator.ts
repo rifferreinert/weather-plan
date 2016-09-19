@@ -32,10 +32,6 @@ export class ForecastCalculator {
   //
   // Where:
   //
-  // rainFactor = ln(1 + rainCoef*intensity)*p(rain)
-  // snowFactor = ln(1 + snowCoefintensity))*p(snow)
-  // sleetFactor = ln(1 + sleetCoef*intensity)*p(sleet)
-  // tempFactor = tempCoef*ln(1 + abs(tempMean - temp))
 
   forecast: ForecastResponse;
   options: ScoreOptions;
@@ -57,12 +53,16 @@ export class ForecastCalculator {
     return daysPrecip;
   }
 
+  private logisticFunction(x: number, B: number): number {
+    return 80 / (1 + 100 * Math.exp(-1 * B * x));
+  }
+
   private rainFactor(dp: DataPoint): number {
     if (dp.precipType !== 'rain') {
       return 0;
     }
 
-    return Math.log(1 + this.options.rainCoef * dp.precipIntensity) * dp.precipProbability;
+    return this.logisticFunction(dp.precipIntensity, this.options.rainCoef);
   }
 
   private snowFactor(dp: DataPoint): number {
@@ -70,7 +70,7 @@ export class ForecastCalculator {
       return 0;
     }
 
-    return Math.log(1 + this.options.snowCoef * dp.precipIntensity) * dp.precipProbability;
+    return this.logisticFunction(dp.precipIntensity, this.options.snowCoef);
   }
 
   private sleetFactor(dp: DataPoint): number {
@@ -78,11 +78,13 @@ export class ForecastCalculator {
       return 0;
     }
 
-    return Math.log(1 + this.options.snowCoef * dp.precipIntensity) * dp.precipProbability;
+    return this.logisticFunction(dp.precipIntensity, this.options.snowCoef);
   }
 
   private tempFactor(dp: DataPoint): number {
-    return this.options.tempCoef * Math.log(1 + Math.abs(this.options.tempMean - dp.temperature));
+
+    return this.logisticFunction(Math.abs(this.options.tempMean - dp.temperature),
+                                 this.options.tempCoef);
   }
 
   private score(dp: DataPoint): Score {
@@ -107,7 +109,7 @@ export class ForecastCalculator {
 
   scoreSchedule(): Score[] {
     return this.forecast.hourly.data.filter(((h) => this.options.hoursAvailable.includes(h.time)))
-      .map(this.score);
+      .map(this.score, this);
   }
 
 }
