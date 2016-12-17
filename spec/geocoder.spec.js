@@ -1,3 +1,4 @@
+'use strict';
 var geocoder = require('../build/lib/geocoder.js');
 var dotenv = require('dotenv');
 

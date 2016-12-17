@@ -1,3 +1,4 @@
+'use strict';
 var dotenv = require('dotenv');
 
 var forecast_io = require('../build/lib/forecast-io.js');

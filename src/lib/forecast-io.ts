@@ -1,4 +1,5 @@
 import * as rp  from 'request-promise';
+import * as Bluebird from 'bluebird';
 import * as querystring from 'querystring';
 import * as geocoder from './geocoder';
 import { ForecastOptions, DataPoint, DataBlock, Alert, ForecastResponse} from './forecast-io-data';
@@ -20,7 +21,7 @@ function buildURL(latitude: number, longitude: number, options?: ForecastOptions
 }
 
 export function getForecastByCoords(latitude: number, longitude: number,
-                                    options?: ForecastOptions): Promise<ForecastResponse> {
+                                    options?: ForecastOptions): Bluebird<ForecastResponse> {
   let url: string;
   url = buildURL(latitude, longitude, options);
 
@@ -31,7 +32,7 @@ export function getForecastByCoords(latitude: number, longitude: number,
 }
 
 export function getForecastByAddress(address: string, options?: ForecastOptions):
-  Promise<ForecastResponse> {
+  Bluebird<ForecastResponse> {
   return geocoder.getCoordinates(address)
     .then(function(location: [number, number]) {
       return getForecastByCoords(location[0], location[1], options);

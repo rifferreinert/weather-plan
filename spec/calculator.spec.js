@@ -1,3 +1,4 @@
+'use strict';
 var dotenv = require('dotenv');
 
 var calculator = require('../build/lib/forecast-calculator.js');
